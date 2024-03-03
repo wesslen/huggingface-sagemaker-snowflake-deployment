@@ -6,8 +6,8 @@ from aws_cdk import (
     aws_apigateway as apigw,
     Duration,
 )
-from .sagemaker_endpoint import SageMakerEndpointConstruct
 from constructs import Construct
+from .sagemaker_endpoint import SageMakerEndpointConstruct
 import os
 
 # policies based on https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html#sagemaker-roles-createmodel-perms
