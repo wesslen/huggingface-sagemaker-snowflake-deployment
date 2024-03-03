@@ -6,6 +6,7 @@ from aws_cdk import (
     aws_apigateway as apigw,
     Duration,
 )
+from .sagemaker_endpoint import SageMakerEndpointConstruct
 from constructs import Construct
 import os
 
@@ -32,7 +33,7 @@ iam_sagemaker_actions = [
     "s3:PutObject",
 ]
 
-class HuggingfaceSagemaker(Stack):
+class HuggingfaceSagemakerStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 

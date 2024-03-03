@@ -1,23 +1,14 @@
 #!/usr/bin/env python3
 import os
+from aws_cdk import App, Environment
+from huggingface_sagemaker.huggingface_stack import HuggingfaceSagemaker
 
-import aws_cdk as cdk
+# Environment
+# CDK_DEFAULT_ACCOUNT and CDK_DEFAULT_REGION are set based on the
+# AWS profile specified using the --profile option.
+my_environment = Environment(account=os.environ["CDK_DEFAULT_ACCOUNT"], region=os.environ["CDK_DEFAULT_REGION"])
 
-from huggingface_sagemaker.huggingface_sagemaker_stack import HuggingfaceSagemakerStack
-
-
-app = cdk.App()
-HuggingfaceSagemakerStack(app, "HuggingfaceSagemakerStack",
-    # If you don't specify 'env', this stack will be environment-agnostic.
-    # Account/Region-dependent features and context lookups will not work,
-    # but a single synthesized template can be deployed anywhere.
-
-    # Uncomment the next line to specialize this stack for the AWS Account
-    # and Region that are implied by the current CLI configuration.
-
-    env=cdk.Environment(account=os.getenv('CDK_DEFAULT_ACCOUNT'), region=os.getenv('CDK_DEFAULT_REGION')),
-
-    # For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html
-    )
+app = App()
+sagemaker = HuggingfaceSagemaker(app, "HuggingfaceSagemakerEndpoint", env=my_environment)
 
 app.synth()
