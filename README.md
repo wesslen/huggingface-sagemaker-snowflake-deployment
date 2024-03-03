@@ -1,5 +1,9 @@
+# Deployed app
 
-# Welcome to your CDK Python project!
+Deploying a Huggingface model to AWS SageMaker with Snowflake connector.
+
+> [!HINT]
+> This repo converts [Phil Schmid's Hugging Face Repo](https://github.com/huggingface/huggingface-sagemaker-snowflake-example) to AWS CLI V2.
 
 # Instructions
 
@@ -8,32 +12,7 @@
 > [!WARNING]
 > This can be the most time-consuming part. Make sure to use AWS CLI v2 and carefully follow the steps.
 
-2. Bootstrap
-
-```
-cdk bootstrap \
-   -c model="distilbert-base-uncased-finetuned-sst-2-english" \
-   -c task="text-classification"
-```
-
-3. Deploy
-
-```
-cdk deploy \
-   -c model="distilbert-base-uncased-finetuned-sst-2-english" \
-   -c task="text-classification"
-```
-
-Test your endpoint with curl:
-
-```
-curl --request POST \
-  --url {HuggingfaceSagemakerEndpoint.hfapigwEndpointE75D67B4} \
-  --header 'Content-Type: application/json' \
-  --data '{
-	"inputs": "Hugging Face, the winner of VentureBeat’s Innovation in Natural Language Process/Understanding Award for 2021, is looking to level the playing field. The team, launched by Clément Delangue and Julien Chaumond in 2016, was recognized for its work in democratizing NLP, the global market value for which is expected to hit $35.1 billion by 2026. This week, Google’s former head of Ethical AI Margaret Mitchell joined the team."
-}'
-```
+2. Clone and setup virtual environment
 
 # Background
 
@@ -81,12 +60,36 @@ To add additional dependencies, for example other CDK libraries, just add
 them to your `setup.py` file and rerun the `pip install -r requirements.txt`
 command.
 
-## Useful commands
+3. Bootstrap
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+```
+cdk bootstrap \
+   -c model="distilbert-base-uncased-finetuned-sst-2-english" \
+   -c task="text-classification"
+```
 
-Enjoy!
+4. Deploy
+
+```
+cdk deploy \
+   -c model="distilbert-base-uncased-finetuned-sst-2-english" \
+   -c task="text-classification"
+```
+
+5. Inference
+
+Test your endpoint with curl:
+
+```
+curl --request POST \
+  --url {HuggingfaceSagemakerEndpoint.hfapigwEndpointE75D67B4} \
+  --header 'Content-Type: application/json' \
+  --data '{"data":{
+        "inputs": "Hugging Face, the winner of VentureBeat’s Innovation in Natural Language Process/Understanding Award for 2021, is looking to level the playing field. The team, launched by Clément Delangue and Julien Chaumond in 2016, was recognized for its work in democratizing NLP, the global market value for which is expected to hit $35.1 billion by 2026. This week, Google’s former head of Ethical AI Margaret Mitchell joined the team."}
+}'
+# {"data": [["i", ["n", "POSITIVE", 0.9506378173828125]]]}
+```
+
+# 6. API Integration with Snowflake
+
+Follow [these instructions](https://github.com/huggingface/huggingface-sagemaker-snowflake-example?tab=readme-ov-file#2-create-api-integration-in-snowflake).
