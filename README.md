@@ -7,14 +7,14 @@ Deploying a Huggingface model to AWS SageMaker with Snowflake connector.
 
 # Instructions
 
-1. [Create AWS account, setup AWS CDK, and setup IAM Identity](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)
+## 1. AWS Setup
+  
+[Create AWS account, setup AWS CDK, and setup IAM Identity](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)
 
 > [!WARNING]
 > This can be the most time-consuming part. Make sure to use AWS CLI v2 and carefully follow the steps.
 
-2. Clone and setup virtual environment
-
-# Background
+## 2. Clone and setup virtual environment
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
@@ -60,7 +60,7 @@ To add additional dependencies, for example other CDK libraries, just add
 them to your `setup.py` file and rerun the `pip install -r requirements.txt`
 command.
 
-3. Bootstrap
+## 3. Bootstrap
 
 ```
 cdk bootstrap \
@@ -68,7 +68,7 @@ cdk bootstrap \
    -c task="text-classification"
 ```
 
-4. Deploy
+## 4. Deploy
 
 ```
 cdk deploy \
@@ -76,7 +76,7 @@ cdk deploy \
    -c task="text-classification"
 ```
 
-5. Inference
+## 5. Inference
 
 Test your endpoint with curl:
 
@@ -90,6 +90,6 @@ curl --request POST \
 # {"data": [["i", ["n", "POSITIVE", 0.9506378173828125]]]}
 ```
 
-# 6. API Integration with Snowflake
+## 6. API Integration with Snowflake
 
 Follow [these instructions](https://github.com/huggingface/huggingface-sagemaker-snowflake-example?tab=readme-ov-file#2-create-api-integration-in-snowflake).
