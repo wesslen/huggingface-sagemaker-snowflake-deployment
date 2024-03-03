@@ -1,9 +1,9 @@
 from aws_cdk import (
     aws_sagemaker as sagemaker,
-    Construct,
+    Environment
 )
-from huggingface_sagemaker.config import LATEST_PYTORCH_VERSION, LATEST_TRANSFORMERS_VERSION, region_dict
-
+from constructs import Construct
+from .constants import LATEST_PYTORCH_VERSION, LATEST_TRANSFORMERS_VERSION, region_dict
 
 def get_image_uri(
     region=None,
@@ -28,7 +28,7 @@ class SageMakerEndpointConstruct(Construct):
         scope: Construct,
         construct_id: str,
         *,
-        env: cdk.Environment,
+        env: Environment,
         huggingface_model: str,
         huggingface_task: str,
         execution_role_arn: str,
