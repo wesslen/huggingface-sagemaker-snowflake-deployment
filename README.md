@@ -1,7 +1,40 @@
 
 # Welcome to your CDK Python project!
 
-This is a blank project for CDK development with Python.
+# Instructions
+
+1. [Create AWS account, setup AWS CDK, and setup IAM Identity](https://docs.aws.amazon.com/cdk/v2/guide/getting_started.html)
+
+> [!WARNING]
+> This can be the most time-consuming part. Make sure to use AWS CLI v2 and carefully follow the steps.
+
+2. Bootstrap
+
+```
+cdk bootstrap \
+   -c model="distilbert-base-uncased-finetuned-sst-2-english" \
+   -c task="text-classification"
+```
+
+3. Deploy
+
+```
+cdk deploy \
+   -c model="distilbert-base-uncased-finetuned-sst-2-english" \
+   -c task="text-classification"
+```
+
+Test your endpoint with curl:
+
+```
+curl --request POST \
+  --url {HuggingfaceSagemakerEndpoint.hfapigwEndpointE75D67B4} \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"inputs": "Hugging Face, the winner of VentureBeat’s Innovation in Natural Language Process/Understanding Award for 2021, is looking to level the playing field. The team, launched by Clément Delangue and Julien Chaumond in 2016, was recognized for its work in democratizing NLP, the global market value for which is expected to hit $35.1 billion by 2026. This week, Google’s former head of Ethical AI Margaret Mitchell joined the team."
+}'
+
+# Background
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
