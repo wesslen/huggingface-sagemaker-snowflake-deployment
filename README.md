@@ -2,7 +2,7 @@
 
 Deploying a Huggingface model to AWS SageMaker with Snowflake connector.
 
-> [!HINT]
+> [!NOTE]
 > This repo converts [Phil Schmid's Hugging Face Repo](https://github.com/huggingface/huggingface-sagemaker-snowflake-example) to AWS CLI V2.
 
 # Instructions
